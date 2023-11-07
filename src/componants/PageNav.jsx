@@ -1,13 +1,11 @@
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Style from "./PageNave.module.css";
 import Logo from "./Logo";
 
 const PageNav = () => {
   return (
     <nav className={Style.nav}>
-      <Link to="/">
-        <Logo />
-      </Link>
+      <Logo />
       <ul>
         <li>
           <NavLink to="/product">Product</NavLink>
