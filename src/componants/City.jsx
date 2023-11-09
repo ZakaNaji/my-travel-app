@@ -21,7 +21,7 @@ function City() {
   const { cityName, emoji, date, notes } = currentCity;
   useEffect(() => {
     getCurrentCity(id);
-  }, [id]);
+  }, [id, getCurrentCity]);
 
   if (isLoading) return <Spinner />;
   return (

@@ -1,5 +1,6 @@
 import {
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useReducer,
@@ -33,13 +34,16 @@ const CityContextProvider = ({ children }) => {
     initState
   );
 
-  const getCurrentCity = async (id) => {
-    if (Number(id) === currentCity.id) return;
-    dispatch({ type: ACTIONS.LOADING, payload: true });
-    const resp = await fetch(`${BASE_URL}/cities/${id}`);
-    const data = await resp.json();
-    dispatch({ type: ACTIONS.CURRENT_CITY_LOADED, payload: data });
-  };
+  const getCurrentCity = useCallback(
+    async (id) => {
+      if (Number(id) === currentCity.id) return;
+      dispatch({ type: ACTIONS.LOADING, payload: true });
+      const resp = await fetch(`${BASE_URL}/cities/${id}`);
+      const data = await resp.json();
+      dispatch({ type: ACTIONS.CURRENT_CITY_LOADED, payload: data });
+    },
+    [currentCity.id]
+  );
   const setNewCity = async (newCity) => {
     dispatch({ type: ACTIONS.LOADING, payload: true });
     const resp = await fetch(`${BASE_URL}/cities`, {
